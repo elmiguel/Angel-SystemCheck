@@ -21,16 +21,20 @@ Else
 %>
 <div id="browserCheck">
 	<noscript>
-		<p><img src="<%=sNuggetPath%>icons/warning.gif" alt="Warning" align=textbottom hspace=2>Javascript is not enabled!</p>
+		<p>Javascript is not enabled!</p>
 	</noscript>
 </div>
-<link href="<%=sNuggetPath%>style-browsercheck.css" rel="stylesheet" type="text/css" media="all" />
+<link href="<%=sNuggetPath%>css/style-browsercheck.css" rel="stylesheet" type="text/css" media="all" />
 <script src="<%=sNuggetPath%>jquery-1.10.1.min.js"></script>
 <script src="<%=sNuggetPath%>jquery-1.10.1.min.map"></script>
 <script src="<%=sNuggetPath%>jquery-migrate-1.2.0.min.js"></script>
 <script src="<%=sNuggetPath%>modernizer.js"></script>
-<script src="<%=sNuggetPath%>plugin-systemcheck2.js"></script>
-
+<script src="<%=sNuggetPath%>jquery-angelsysheck.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#browserCheck").systemCheck();
+	});
+</script>
 <% 
 	Response.Write Mid(sNuggetText, iAt)
 End If 
