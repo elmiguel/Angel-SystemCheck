@@ -1,0 +1,29 @@
+This Angel Nugget was recreated using the use of jQuery plugins to provide a more customizable plugin. 
+
+
+Install:
+	1. Download via zip or git to a folder e.g.: SystemCheck2
+	
+	2. Make sure that the stucture is:
+		Example:  SystemCheck2/
+			  SystemCheck2/files.....
+	
+	3. Upload this zip to your Angel Root\Portal\Nuggets and extract its contents.
+		Example:  Angel Root\Portal\Nuggets\SystemCheck2 (after extracting and deleteing zip)
+	
+	4. Register the Nugget from within the  Portal Components Manager
+	
+	5. Add the Component to the Login Page for your Angel LMS
+		Example: home.asp
+	
+	6. Make sure this install is set across all instance nodes
+
+
+Notes:
+This has been tested on a Windows PC across all broswers : Internet Explorer, Google Chrome, Firefox, Windows Sarfari.
+
+
+
+The plugin uses window.navigator to obtain most of the browser information. It does have a dependency: jquery-migrate.
+This plugin double checks the broswer app name and get a clean way of the browsers version. 
+
