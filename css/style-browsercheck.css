@@ -1,0 +1,89 @@
+
+#browserCheck{width:100%;}
+#browserCheck ul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+.requirements ul li, .plugins ul li{
+	padding-left: 24px;
+}
+
+.help-link{}
+
+#browserCheck div{
+	position: relative;
+	float: left;
+}
+.broswer-info-container{
+	width: 100%;
+}
+
+.browser-icon-size{
+	width: 75px;
+	height: 75px;
+}
+.browser-icon-mozilla{
+	background: url("../icons/mozilla.gif") no-repeat;
+}
+.browser-icon-webkit{
+	background: url("../icons/webkit.gif") no-repeat;
+}
+.browser-icon-safari{
+	background: url("../icons/safari.gif") no-repeat;
+}
+.browser-icon-chrome{
+	background: url("../icons/chrome.gif") no-repeat;
+}
+.browser-icon-firefox{
+	background: url("../icons/firefox.gif") no-repeat;
+}
+.browser-icon-opera{
+	background: url("../icons/opera.gif") no-repeat;
+}
+.browser-icon-msie{
+	background: url("../icons/explorer.gif") no-repeat;
+}
+
+.browser-info{
+	height: 68px;
+}
+.browser-info p{
+	padding: 10px 0px 0px 10px;
+}
+
+.requirements, .plugins{
+	width: 48%;
+	margin-left: 5px;
+}
+
+.plugin-acrobat{
+	background: url("../icons/acrobat24.gif") no-repeat;
+    width: 24px;
+	height: 24px;
+}
+.plugin-flash{
+	background: url("../icons/flash24.gif") no-repeat;
+    width: 24px;
+	height: 24px;
+}
+.plugin-quicktime{
+	background: url("../icons/quicktime24.gif") no-repeat;
+    width: 24px;
+	height: 24px;
+}
+.plugin-wmp{
+	background: url("../icons/winmedia24.gif") no-repeat;
+    width: 24px;
+	height: 24px;
+}
+
+.status-ok{
+	background: url("../icons/ok24.gif") no-repeat;
+	height: 24px;
+}
+.status-x{
+	background: url("../icons/error24.gif") no-repeat;
+	height: 24px;
+}
