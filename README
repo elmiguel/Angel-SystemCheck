@@ -27,3 +27,19 @@ This has been tested on a Windows PC across all broswers : Internet Explorer, Go
 The plugin uses window.navigator to obtain most of the browser information. It does have a dependency: jquery-migrate.
 This plugin double checks the broswer app name and get a clean way of the browsers version. 
 
+
+This plugin also uses a different method in checking for the plugins and displaying to the user. It no longer relies on Acrobat 
+as being the only PDF Viewer. Chrome and believed Safari (haven't checked it yet, waiting for my Mac to be setup), have a pre-built
+plugin call PDF Viewer. Since some users are unaware of this they do not know that they do not have to install Adobe Acrobat. For Mac
+users, this plugin is checking for Flip4Mac as there do not have the correct plugin install to trigger the ok for Window Media Player.
+This will allow the user to know what plugin they have installed.
+
+	Example:
+		Firefox: No native PDF viewer, install Acrobat and get a green check.
+
+		Chrome: Native, Chrome PDF Viewer, the systme check prints out: Chrome PDF Viewer with a green check.
+
+
+TODO:
+More to come.....
+
