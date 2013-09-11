@@ -29,7 +29,7 @@ Else
 <script src="<%=sNuggetPath%>jquery-1.10.1.min.map"></script>
 <script src="<%=sNuggetPath%>jquery-migrate-1.2.0.min.js"></script>
 <script src="<%=sNuggetPath%>modernizer.js"></script>
-<script src="<%=sNuggetPath%>jquery-angelsysheck.js"></script>
+<script src="<%=sNuggetPath%>jquery-angelsyscheck.js"></script>
 <script>
 	$(document).ready(function(){
 		$("#browserCheck").systemCheck();
