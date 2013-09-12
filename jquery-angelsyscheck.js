@@ -35,15 +35,15 @@ if (!String.prototype.format) {
 					userAgent: "unknown",
 					product: "unknown",
 					os: "unknown",
-					cookies: "unknown",
-					popups: "x",
-					ajax: "x",
-					java: {"status":"x", "plugin": "unknown"},
-					javascript: "ok",                              //Handled by noscript tags, if your here, then your good.
-					flash: {"status":"x", "plugin": "unknown"},
-					wmp: {"status":"x", "plugin": "unknown"},
-					quicktime: {"status":"x", "plugin": "unknown"},
-					acrobat: {"status":"x", "plugin": "unknown"},
+					cookies: {"staus": "x", "plugin": "No Cookies"},
+					popups: {"staus": "x", "plugin":"No Popups"},
+					ajax: {"staus": "x", "plugin":"No Ajax"},
+					java: {"status":"x", "plugin": "No Java"},
+					javascript: {"status":"ok","plugin": "Javascript"},    //Handled by noscript tags, if your here, then your good.
+					flash: {"status":"x", "plugin": "No Flash"},
+					wmp: {"status":"x", "plugin": "No WMP Codec"},
+					quicktime: {"status":"x", "plugin": "No Quicktime"},
+					acrobat: {"status":"x", "plugin": "No PDF Viewer"},
 					screenW: screen.width,
 					screenH: screen.height,
 					colorDepth: screen.colorDepth
@@ -57,12 +57,12 @@ if (!String.prototype.format) {
 			settings.codeName 		= window.navigator.appCodeName;		//return the browser code name
 			settings.appName        = window.navigator.appName;     	//return the browser base name
 			settings.appVersion     = window.navigator.appVersion,  	//return the verison per OS of the app
-			settings.cookies  		= (window.navigator.cookieEnabled) ? "ok":"x";   //checks to see if cookies are enabled
+			settings.cookies  		= (window.navigator.cookieEnabled) ? {"status": "ok","plugin": "Cookies"}:settings.cookies;  //checks to see if cookies are enabled
 			settings.os          	= window.navigator.oscpu;           //returns the OS and architecture
 			settings.platform       = window.navigator.platform;        //returns the short OS and architecture form
 			settings.product        = window.navigator.product;         //returns broswer engine type
 		    settings.userAgent		= window.navigator.userAgent;       //returns the user agent of the browser
-			settings.ajax           = ($.support.ajax) ? "ok":"x"; 		//check to see if ajax is available
+			settings.ajax           = ($.support.ajax) ? {"status": "ok","plugin": "Ajax"}:settings.ajax; //check to see if ajax is available
 
 
 			methods.checkPlugins();
@@ -94,8 +94,17 @@ if (!String.prototype.format) {
 					//Acrobat Reader
 					case /acrobat/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
 
+					//Adobe Acrobat, not the same as Acrobat Reader for some reason
+					case /adobe\s+acrobat/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
+					
+					//Adobe Reader
+					case /adobe\s+reader/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
+
 					//Adobe Flash or Shockwave Flash
 					case /flash/i.test(plugin.name):settings.flash = {"status": "ok", "plugin": plugin.name}; break;
+
+					//Chrome PDF Viewer or PDF something
+					case /pdf/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
 
 					//Windows Media Player
 					case /media\s+player/i.test(plugin.name):settings.wmp = {"status": "ok", "plugin": plugin.name}; break;
@@ -104,22 +113,14 @@ if (!String.prototype.format) {
 					case /quicktime/i.test(plugin.name): settings.quicktime = {"status": "ok", "plugin": plugin.name}; break;
 
 					//Java
-
 					case /java.*SE/i.test(plugin.name):settings.java = {"status": "ok", "plugin": plugin.name}; break;
 					
+					//Java(TM) and the like.
 					case /java\(.*\)/i.test(plugin.name):settings.java = {"status": "ok", "plugin": plugin.name}; break;
-					//Chrome PDF Viewer or PDF something
-					case /pdf/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
-
-					//Adobe Acrobat, not the same as Acrobat Reader for some reason
-					case /adobe\s+acrobat/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
 					
-					//Adobe Reader
-					case /adobe\s+reader/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
-
 					//Flip4Mac for  Mac users, just setting the WMP as its just a codec
 					case /flip4mac/i.test(plugin.name):settings.wmp = {"status": "ok", "plugin": plugin.name}; break;
-				   }
+				}
 			});
 
 		},//end of checkPlugins Add: , newMethod: function()
@@ -127,9 +128,9 @@ if (!String.prototype.format) {
    			//console.log("systemCheck.methods.checkPopUps called...");
 			var popUp = window.open('', '', 'width=100, height=100, left=24, top=24, scrollbars, resizable');
 			if (popUp == null || typeof(popUp)=='undefined') {
-	   			settings.popups = "x";
+	   			settings.popups = {"staus": "x", "plugin":"No Popups"};
 			} else {
-				settings.popups = "ok";
+				settings.popups = {"staus": "ok", "plugin":"Popups"};
 				popUp.close();
 			}
 		},//end of checkPopUps Add: , newMethod: function()
@@ -173,29 +174,29 @@ if (!String.prototype.format) {
 						"	<div class=\"requirements\">",
 						"		<h3>Requirements</h3>",
 						"		<ul>",
-				 		"			<li class=\"status-{7}\"><a class=\"help-link\" href=\"https://angel.irsc.edu/Help/default.asp?WCI=pgDisplay&amp;WCU=HELP&amp;ENTRY_ID=5E949CE2B57346888EEA8625777A709B\">Ajax</a></li>",
-				 		"			<li class=\"status-{8}\"><a class=\"help-link\" href=\"https://angel.irsc.edu/Help/default.asp?WCI=pgDisplay&amp;WCU=HELP&amp;ENTRY_ID=5E949CE2B57346888EEA8625777A709B\">Cookies</a></li>",
-				 		"			<li class=\"status-{9}\"><a class=\"help-link\" href=\"http://www.java.com\" target_=\"_blank\">{10}</a></li>",
-				 		"			<li class=\"status-{11}\"><a class=\"help-link\" href=\"https://angel.irsc.edu/Help/default.asp?WCI=pgDisplay&amp;WCU=HELP&amp;ENTRY_ID=5E949CE2B57346888EEA8625777A709B\">Javascript</a></li>",
-				 		"			<li class=\"status-{12}\"><a class=\"help-link\" href=\"https://angel.irsc.edu/Help/default.asp?WCI=pgDisplay&amp;WCU=HELP&amp;ENTRY_ID=5E949CE2B57346888EEA8625777A709B\">Popups</a></li>",
+				 		"			<li class=\"status-{7}\"><a class=\"help-link\" href=\"https://angel.irsc.edu/Help/default.asp?WCI=pgDisplay&amp;WCU=HELP&amp;ENTRY_ID=5E949CE2B57346888EEA8625777A709B\">{8}</a></li>",
+				 		"			<li class=\"status-{9}\"><a class=\"help-link\" href=\"https://angel.irsc.edu/Help/default.asp?WCI=pgDisplay&amp;WCU=HELP&amp;ENTRY_ID=5E949CE2B57346888EEA8625777A709B\">{10}</a></li>",
+				 		"			<li class=\"status-{11}\"><a class=\"help-link\" href=\"http://www.java.com\" target_=\"_blank\">{12}</a></li>",
+				 		"			<li class=\"status-{13}\"><a class=\"help-link\" href=\"https://angel.irsc.edu/Help/default.asp?WCI=pgDisplay&amp;WCU=HELP&amp;ENTRY_ID=5E949CE2B57346888EEA8625777A709B\">{14}</a></li>",
+				 		"			<li class=\"status-{15}\"><a class=\"help-link\" href=\"https://angel.irsc.edu/Help/default.asp?WCI=pgDisplay&amp;WCU=HELP&amp;ENTRY_ID=5E949CE2B57346888EEA8625777A709B\">{16}</a></li>",
 						"		</ul>",
 						"	</div>",
 						"	<div class=\"plugins\">",
 						"		<h3>Plugins</h3>",
 						"		<ul>",
-		            	"			<li class=\"status-{13}\"><a class=\"help-link\" href=\"http://get.adobe.com/reader\" target_=\"_blank\"><div class=\"plugin-acrobat\"></div>{14}</a></li>",
-		            	"			<li class=\"status-{15}\"><a class=\"help-link\" href=\"http://get.adobe.com/flashplayer\" target_=\"_blank\"><div class=\"plugin-flash\"></div>{16}</a></li>",
-		            	"			<li class=\"status-{17}\"><a class=\"help-link\" href=\"http://www.apple.com/quicktime/download/\" target_=\"_blank\"><div class=\"plugin-quicktime\"></div>{18}</a></li>",
-		            	"			<li class=\"status-{19}\"><a class=\"help-link\" href=\"http://port25.technet.com/pages/windows-media-player-firefox-plugin-download.aspx\" target_=\"_blank\"><div class=\"plugin-wmp\"></div>{20}</a></li>",
+		            	"			<li class=\"status-{17}\"><a class=\"help-link\" href=\"http://get.adobe.com/reader\" target_=\"_blank\"><div class=\"plugin-acrobat\"></div>{18}</a></li>",
+		            	"			<li class=\"status-{19}\"><a class=\"help-link\" href=\"http://get.adobe.com/flashplayer\" target_=\"_blank\"><div class=\"plugin-flash\"></div>{20}</a></li>",
+		            	"			<li class=\"status-{21}\"><a class=\"help-link\" href=\"http://www.apple.com/quicktime/download/\" target_=\"_blank\"><div class=\"plugin-quicktime\"></div>{22}</a></li>",
+		            	"			<li class=\"status-{23}\"><a class=\"help-link\" href=\"http://port25.technet.com/pages/windows-media-player-firefox-plugin-download.aspx\" target_=\"_blank\"><div class=\"plugin-wmp\"></div>{24}</a></li>",
 						"		</ul>",
 						"	</div>",
 						"</div>",
 						"<div id=\"systemCheckMessage\"><p>If you are experiencing any issues with the plugins please either click on the plugin link or you can <a href=\"https://angel.irsc.edu/Help/default.asp?WCI=pgDisplay&WCU=HELP&ENTRY_ID=5E949CE2B57346888EEA8625777A709B\">click here for System Check Help</a></p></div>"].join("").format(
 				settings.browser, settings.browserSafeName, settings.browserVersion, settings.platform,
-		        settings.screenW, settings.screenH, settings.colorDepth, settings.ajax,
-				settings.cookies, settings.java.status, settings.java.plugin, settings.javascript,
-		        settings.popups, settings.acrobat.status, settings.acrobat.plugin, settings.flash.status,
-                settings.flash.plugin,settings.quicktime.status, settings.quicktime.plugin, settings.wmp.status, settings.wmp.plugin);
+		        settings.screenW, settings.screenH, settings.colorDepth, settings.ajax.status, settings.ajax.plugin,
+				settings.cookies.status, settings.cookies.plugin, settings.java.status, settings.java.plugin, settings.javascript.status,
+				settings.javascript.plugin, settings.popups.status, settings.popups.plugin, settings.acrobat.status, settings.acrobat.plugin, 
+				settings.flash.status, settings.flash.plugin,settings.quicktime.status, settings.quicktime.plugin, settings.wmp.status, settings.wmp.plugin);
 			return html;
 		}
 	};
