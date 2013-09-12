@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>System Check Nugget</title>
+    <meta charset='utf-8'>
+	<script src="./jquery-1.10.1.min.js"></script>
+	<script src="./jquery-migrate-1.2.0.min.js"></script>
+    <link href="./css/style-browsercheck.css" rel="stylesheet" type="text/css" media="all" />
+  </head>
+  <body>
+	<div id="browserCheck"><noscript>Javascript is not enabled, please enable Javascript!</noscript></div>
+    <script src="./jquery-angelsyscheck.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#browserCheck").systemCheck();
+		});
+	</script>
+  </body>
+</html>
