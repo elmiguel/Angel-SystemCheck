@@ -21,7 +21,25 @@ if (!String.prototype.format) {
 (function($){
 	var defaults = {
 		name: "System Check",
-		version: 2
+		version: 2,
+		winlinks: {
+				"pdf": {"plugin":"Acrobat Reader", "link":"http://get.adobe.com/reader"},
+				"flash": {"plugin":"Flash Player","link": "http://get.adobe.com/flash"},
+				"quicktime": {"plugin":"Quicktime Player", "link":"http://www.apple.com/quicktime/download/"},
+				"wmp": {"plugin":"Windows Media Player Plugin", "link": "http://port25.technet.com/pages/windows-media-player-firefox-plugin-download.aspx"}
+		},
+		maclinks: {
+				"pdf": {"plugin":"Acrobat Reader", "link":"http://get.adobe.com/reader"},
+				"flash": {"plugin":"Flash Player","link": "http://get.adobe.com/flash"},
+				"quicktime": {"plugin":"Quicktime Player", "link":"http://www.apple.com/quicktime/download/"},
+				"wmp":{"plugin": "Flip4Mac", "link":"http://www.telestream.net/flip4mac/"}		
+		},
+		linlinks: {
+				"pdf": {"plugin":"Acrobat Reader", "link":"http://get.adobe.com/reader"},
+				"flash": {"plugin":"Flash Player","link": "http://get.adobe.com/flash"},
+				"quicktime": {"plugin": "MPlayer", "link":"http://www.mplayerhq.hu/design7/dload.html"},
+				"wmp":{"plugin": "MPlayer", "link":"http://www.mplayerhq.hu/design7/dload.html"}
+		}
 	};
 
     var settings = {
@@ -35,15 +53,15 @@ if (!String.prototype.format) {
 					userAgent: "unknown",
 					product: "unknown",
 					os: "unknown",
-					cookies: {"status": "x", "plugin": "No Cookies"},
-					popups: {"status": "x", "plugin":"No Popups"},
-					ajax: {"status": "x", "plugin":"No Ajax"},
-					java: {"status":"x", "plugin": "No Java"},
-					javascript: {"status":"ok","plugin": "Javascript"},    //Handled by noscript tags, if your here, then your good.
-					flash: {"status":"x", "plugin": "No Flash"},
-					wmp: {"status":"x", "plugin": "No WMP Codec"},
-					quicktime: {"status":"x", "plugin": "No Quicktime"},
-					acrobat: {"status":"x", "plugin": "No PDF Viewer"},
+					cookies: {"status": "x", "plugin": "No Cookies", "link":""},
+					popups: {"status": "x", "plugin":"No Popups", "link":""},
+					ajax: {"status": "x", "plugin":"No Ajax", "link":""},
+					java: {"status":"x", "plugin": "No Java", "link":""},
+					javascript: {"status":"ok","plugin": "Javascript", "link":""},    //Handled by noscript tags, if your here, then your good.
+					flash: {"status":"x", "plugin": "No Flash", "link":""},
+					wmp: {"status":"x", "plugin": "No WMP Codec", "link":""},
+					quicktime: {"status":"x", "plugin": "No Quicktime", "link":""},
+					acrobat: {"status":"x", "plugin": "No PDF Viewer", "link":""},
 					screenW: screen.width,
 					screenH: screen.height,
 					colorDepth: screen.colorDepth
@@ -51,23 +69,24 @@ if (!String.prototype.format) {
 
 	var methods = {
 		init: function(options){
-			var o = $.extend({}, defaults, options);
-			this.html(o.name + " v" + o.version);
+			var opts = $.extend({}, defaults, options);
+			this.html(opts.name + " v" + opts.version);
 
 			settings.codeName 		= window.navigator.appCodeName;		//return the browser code name
 			settings.appName        = window.navigator.appName;     	//return the browser base name
 			settings.appVersion     = window.navigator.appVersion,  	//return the verison per OS of the app
-			settings.cookies  		= (window.navigator.cookieEnabled) ? {"status": "ok","plugin": "Cookies"}:settings.cookies;  //checks to see if cookies are enabled
+			settings.cookies  		= (window.navigator.cookieEnabled) ? {"status": "ok","plugin": "Cookies", "link": ""}:settings.cookies;  //checks to see if cookies are enabled
 			settings.os          	= window.navigator.oscpu;           //returns the OS and architecture
 			settings.platform       = window.navigator.platform;        //returns the short OS and architecture form
 			settings.product        = window.navigator.product;         //returns broswer engine type
 		    settings.userAgent		= window.navigator.userAgent;       //returns the user agent of the browser
-			settings.ajax           = ($.support.ajax) ? {"status": "ok","plugin": "Ajax"}:settings.ajax; //check to see if ajax is available
+			settings.ajax           = ($.support.ajax) ? {"status": "ok","plugin": "Ajax", "link": ""}:settings.ajax; //check to see if ajax is available
 
 
 			methods.checkPlugins();
 			methods.checkPopUps();
 			methods.setBroswer();
+			methods.setErrorLinks(opts);
 			//console.log(settings);
 
 			//set the main container to the new html data
@@ -92,31 +111,59 @@ if (!String.prototype.format) {
 			$.each(window.navigator.plugins, function(index, plugin){
 				switch(true){
 					//Acrobat Reader, older plugins
-					case /acrobat/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
+					case /acrobat/i.test(plugin.name):
+						settings.acrobat.status = "ok";
+						settings.acrobat.plugin = plugin.name; 
+						break;
 
 					//Adobe Acrobat, not the same as Acrobat Reader for some reason
-					case /adobe\s+acrobat/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
+					case /adobe\s+acrobat/i.test(plugin.name):
+						settings.acrobat.status = "ok";
+						settings.acrobat.plugin = plugin.name; 
+						break;
 					
 					//Adobe Reader
-					case /adobe\s+reader/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
+					case /adobe\s+reader/i.test(plugin.name):
+						settings.acrobat.status = "ok";
+						settings.acrobat.plugin = plugin.name; 
+						break;
+					
+					//Chrome PDF Viewer or PDF something
+					case /pdf/i.test(plugin.name):
+						settings.acrobat.status = "ok";
+						settings.acrobat.plugin = plugin.name; 
+						break;
+
 
 					//Adobe Flash or Shockwave Flash
-					case /flash/i.test(plugin.name):settings.flash = {"status": "ok", "plugin": plugin.name}; break;
-
-					//Chrome PDF Viewer or PDF something
-					case /pdf/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
+					case /flash/i.test(plugin.name):
+						settings.flash.status = "ok";
+						settings.flash.plugin = plugin.name; 
+						break;
 
 					//Windows Media Player
-					case /media\s+player/i.test(plugin.name):settings.wmp = {"status": "ok", "plugin": plugin.name}; break;
-
+					case /media\s+player/i.test(plugin.name):
+						settings.wmp.status = "ok";
+						settings.wmp.plugin = plugin.name; 
+						break;
+					
 					//Quicktime player
-					case /quicktime/i.test(plugin.name): settings.quicktime = {"status": "ok", "plugin": plugin.name}; break;
+					case /quicktime/i.test(plugin.name):
+						settings.quicktime.status = "ok";
+						settings.quicktime.plugin = plugin.name; 
+						break;
 					
 					//Java(TM) and the like.
-					case /java\(.*\)/i.test(plugin.name):settings.java = {"status": "ok", "plugin": plugin.name}; break;
+					case /java\(.*\)/i.test(plugin.name):
+						settings.java.status = "ok";
+						settings.java.plugin = plugin.name; 
+						break;
 					
 					//Flip4Mac for  Mac users, just setting the WMP as its just a codec
-					case /flip4mac/i.test(plugin.name):settings.wmp = {"status": "ok", "plugin": plugin.name}; break;
+					case /flip4mac/i.test(plugin.name):
+						settings.wmp.status = "ok";
+						settings.wmp.plugin = plugin.name; 
+						break;
 				}
 			});
 
@@ -160,6 +207,29 @@ if (!String.prototype.format) {
 
 			settings.browserVersion = $.browser.version;
 		},//end of setBroswer Add: , newMethod: function()
+		setErrorLinks: function(opts){
+				switch(true){
+						case (/linux/i.test(settings.os)):
+							settings.acrobat.link = opts.linlinks.pdf.link;
+							settings.flash.link = opts.linlinks.flash.link;
+							settings.quicktime.wink = opts.linlinks.quicktime.link;
+							settings.wmp.link = opts.linlinks.wmp.link;
+							break;
+						case (/os/i.test(settings.os)):
+							settings.acrobat.link = opts.maclinks.pdf.link;
+							settings.flash.link = opts.maclinks.flash.link;
+							settings.quicktime.wink = opts.maclinks.quicktime.link;
+							settings.wmp.link = opts.maclinks.wmp.link;
+							break;
+						case (/windows/i.test(settings.os)):
+							settings.acrobat.link = opts.winlinks.pdf.link;
+							settings.flash.link = opts.winlinks.flash.link;
+							settings.quicktime.wink = opts.winlinks.quicktime.link;
+							settings.wmp.link = opts.winlinks.wmp.link;
+							break;
+							
+				}
+		},//end of setErrorLink Add: , newMethod: function()
 		setHtml: function(){
 			//console.log("systemCheck.methods.setHtml called...");
            //Set the output to var and inject the values using the str.format() function.ext
@@ -181,10 +251,10 @@ if (!String.prototype.format) {
 						"	<div class=\"plugins\">",
 						"		<h3>Plugins</h3>",
 						"		<ul>",
-		            	"			<li class=\"status-{17}\"><a class=\"help-link\" href=\"http://get.adobe.com/reader\" target_=\"_blank\"><div class=\"plugin-acrobat\"></div>{18}</a></li>",
-		            	"			<li class=\"status-{19}\"><a class=\"help-link\" href=\"http://get.adobe.com/flashplayer\" target_=\"_blank\"><div class=\"plugin-flash\"></div>{20}</a></li>",
-		            	"			<li class=\"status-{21}\"><a class=\"help-link\" href=\"http://www.apple.com/quicktime/download/\" target_=\"_blank\"><div class=\"plugin-quicktime\"></div>{22}</a></li>",
-		            	"			<li class=\"status-{23}\"><a class=\"help-link\" href=\"http://port25.technet.com/pages/windows-media-player-firefox-plugin-download.aspx\" target_=\"_blank\"><div class=\"plugin-wmp\"></div>{24}</a></li>",
+		            	"			<li class=\"status-{17}\"><a class=\"help-link\" href=\"{18}\" target_=\"_blank\"><div class=\"plugin-acrobat\"></div>{19}</a></li>",
+		            	"			<li class=\"status-{20}\"><a class=\"help-link\" href=\"{21}\" target_=\"_blank\"><div class=\"plugin-flash\"></div>{22}</a></li>",
+		            	"			<li class=\"status-{23}\"><a class=\"help-link\" href=\"{24}\" target_=\"_blank\"><div class=\"plugin-quicktime\"></div>{25}</a></li>",
+		            	"			<li class=\"status-{26}\"><a class=\"help-link\" href=\"{27}\" target_=\"_blank\"><div class=\"plugin-wmp\"></div>{28}</a></li>",
 						"		</ul>",
 						"	</div>",
 						"</div>",
@@ -192,8 +262,9 @@ if (!String.prototype.format) {
 				settings.browser, settings.browserSafeName, settings.browserVersion, settings.platform,
 		        settings.screenW, settings.screenH, settings.colorDepth, settings.ajax.status, settings.ajax.plugin,
 				settings.cookies.status, settings.cookies.plugin, settings.java.status, settings.java.plugin, settings.javascript.status,
-				settings.javascript.plugin, settings.popups.status, settings.popups.plugin, settings.acrobat.status, settings.acrobat.plugin, 
-				settings.flash.status, settings.flash.plugin,settings.quicktime.status, settings.quicktime.plugin, settings.wmp.status, settings.wmp.plugin);
+				settings.javascript.plugin, settings.popups.status, settings.popups.plugin, settings.acrobat.status, settings.acrobat.link, 
+				settings.acrobat.plugin, settings.flash.status, settings.flash.link, settings.flash.plugin, settings.quicktime.status, 
+				settings.quicktime.link, settings.quicktime.plugin, settings.wmp.status, settings.wmp.link, settings.wmp.plugin);
 			return html;
 		}
 	};
