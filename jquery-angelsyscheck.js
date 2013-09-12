@@ -212,19 +212,19 @@ if (!String.prototype.format) {
 						case (/linux/i.test(settings.platform)):
 							settings.acrobat.link = opts.linlinks.pdf.link;
 							settings.flash.link = opts.linlinks.flash.link;
-							settings.quicktime.wink = opts.linlinks.quicktime.link;
+							settings.quicktime.link = opts.linlinks.quicktime.link;
 							settings.wmp.link = opts.linlinks.wmp.link;
 							break;
 						case (/os/i.test(settings.platform)):
 							settings.acrobat.link = opts.maclinks.pdf.link;
 							settings.flash.link = opts.maclinks.flash.link;
-							settings.quicktime.wink = opts.maclinks.quicktime.link;
+							settings.quicktime.link = opts.maclinks.quicktime.link;
 							settings.wmp.link = opts.maclinks.wmp.link;
 							break;
 						case (/win/i.test(settings.platform)):
 							settings.acrobat.link = opts.winlinks.pdf.link;
 							settings.flash.link = opts.winlinks.flash.link;
-							settings.quicktime.wink = opts.winlinks.quicktime.link;
+							settings.quicktime.link = opts.winlinks.quicktime.link;
 							settings.wmp.link = opts.winlinks.wmp.link;
 							break;
 							
