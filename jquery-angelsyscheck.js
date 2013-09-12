@@ -35,7 +35,7 @@ if (!String.prototype.format) {
 					userAgent: "unknown",
 					product: "unknown",
 					os: "unknown",
-					cookies: {"staus": "x", "plugin": "No Cookies"},
+					cookies: {"status": "x", "plugin": "No Cookies"},
 					popups: {"status": "x", "plugin":"No Popups"},
 					ajax: {"status": "x", "plugin":"No Ajax"},
 					java: {"status":"x", "plugin": "No Java"},
@@ -91,7 +91,7 @@ if (!String.prototype.format) {
 			**/
 			$.each(window.navigator.plugins, function(index, plugin){
 				switch(true){
-					//Acrobat Reader
+					//Acrobat Reader, older plugins
 					case /acrobat/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
 
 					//Adobe Acrobat, not the same as Acrobat Reader for some reason
@@ -111,9 +111,6 @@ if (!String.prototype.format) {
 
 					//Quicktime player
 					case /quicktime/i.test(plugin.name): settings.quicktime = {"status": "ok", "plugin": plugin.name}; break;
-
-					//Java
-					case /java.*SE/i.test(plugin.name):settings.java = {"status": "ok", "plugin": plugin.name}; break;
 					
 					//Java(TM) and the like.
 					case /java\(.*\)/i.test(plugin.name):settings.java = {"status": "ok", "plugin": plugin.name}; break;
