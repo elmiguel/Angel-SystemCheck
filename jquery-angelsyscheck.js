@@ -36,8 +36,8 @@ if (!String.prototype.format) {
 					product: "unknown",
 					os: "unknown",
 					cookies: {"staus": "x", "plugin": "No Cookies"},
-					popups: {"staus": "x", "plugin":"No Popups"},
-					ajax: {"staus": "x", "plugin":"No Ajax"},
+					popups: {"status": "x", "plugin":"No Popups"},
+					ajax: {"status": "x", "plugin":"No Ajax"},
 					java: {"status":"x", "plugin": "No Java"},
 					javascript: {"status":"ok","plugin": "Javascript"},    //Handled by noscript tags, if your here, then your good.
 					flash: {"status":"x", "plugin": "No Flash"},
@@ -128,9 +128,9 @@ if (!String.prototype.format) {
    			//console.log("systemCheck.methods.checkPopUps called...");
 			var popUp = window.open('', '', 'width=100, height=100, left=24, top=24, scrollbars, resizable');
 			if (popUp == null || typeof(popUp)=='undefined') {
-	   			settings.popups = {"staus": "x", "plugin":"No Popups"};
+	   			settings.popups = {"status": "x", "plugin":"No Popups"};
 			} else {
-				settings.popups = {"staus": "ok", "plugin":"Popups"};
+				settings.popups = {"status": "ok", "plugin":"Popups"};
 				popUp.close();
 			}
 		},//end of checkPopUps Add: , newMethod: function()
