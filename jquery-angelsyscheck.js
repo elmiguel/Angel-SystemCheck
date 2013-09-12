@@ -209,19 +209,19 @@ if (!String.prototype.format) {
 		},//end of setBroswer Add: , newMethod: function()
 		setErrorLinks: function(opts){
 				switch(true){
-						case (/linux/i.test(settings.os)):
+						case (/linux/i.test(settings.platform)):
 							settings.acrobat.link = opts.linlinks.pdf.link;
 							settings.flash.link = opts.linlinks.flash.link;
 							settings.quicktime.wink = opts.linlinks.quicktime.link;
 							settings.wmp.link = opts.linlinks.wmp.link;
 							break;
-						case (/os/i.test(settings.os)):
+						case (/os/i.test(settings.platform)):
 							settings.acrobat.link = opts.maclinks.pdf.link;
 							settings.flash.link = opts.maclinks.flash.link;
 							settings.quicktime.wink = opts.maclinks.quicktime.link;
 							settings.wmp.link = opts.maclinks.wmp.link;
 							break;
-						case (/windows/i.test(settings.os)):
+						case (/win/i.test(settings.platform)):
 							settings.acrobat.link = opts.winlinks.pdf.link;
 							settings.flash.link = opts.winlinks.flash.link;
 							settings.quicktime.wink = opts.winlinks.quicktime.link;
