@@ -159,6 +159,11 @@ if (!String.prototype.format) {
 						settings.java.plugin = plugin.name; 
 						break;
 					
+					//Java Applet and the like.
+					case /java\s+applet/i.test(plugin.name):
+						settings.java.status = "ok";
+						settings.java.plugin = plugin.name; 
+						break;
 					//Flip4Mac for  Mac users, just setting the WMP as its just a codec
 					case /flip4mac/i.test(plugin.name):
 						settings.wmp.status = "ok";
