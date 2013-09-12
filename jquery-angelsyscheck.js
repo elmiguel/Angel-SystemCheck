@@ -104,13 +104,18 @@ if (!String.prototype.format) {
 					case /quicktime/i.test(plugin.name): settings.quicktime = {"status": "ok", "plugin": plugin.name}; break;
 
 					//Java
-					case /java.*SE/i.test(plugin.name):settings.java = {"status": "ok", "plugin": plugin.name}; break;
 
+					case /java.*SE/i.test(plugin.name):settings.java = {"status": "ok", "plugin": plugin.name}; break;
+					
+					case /java\(.*\)/i.test(plugin.name):settings.java = {"status": "ok", "plugin": plugin.name}; break;
 					//Chrome PDF Viewer or PDF something
 					case /pdf/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
 
 					//Adobe Acrobat, not the same as Acrobat Reader for some reason
 					case /adobe\s+acrobat/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
+					
+					//Adobe Reader
+					case /adobe\s+reader/i.test(plugin.name):settings.acrobat = {"status": "ok", "plugin": plugin.name}; break;
 
 					//Flip4Mac for  Mac users, just setting the WMP as its just a codec
 					case /flip4mac/i.test(plugin.name):settings.wmp = {"status": "ok", "plugin": plugin.name}; break;
