@@ -12,7 +12,26 @@
     <script src="./jquery-angelsyscheck.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("#browserCheck").systemCheck();
+			$("#browserCheck").systemCheck({
+				winlinks: {
+					pdf:{
+						plugin: "#",
+						link: "#"
+					}, 
+					flash:{
+						plugin: "#",
+						link: "#"				
+					}, 
+					quicktime:{
+						plugin: "#",
+						link: "#"					
+					}, 
+					wmp:{
+						plugin:"#",
+						link: "#"					
+					}
+				}
+			});
 		});
 	</script>
   </body>
