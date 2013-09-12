@@ -25,19 +25,19 @@ if (!String.prototype.format) {
 		winlinks: {
 				"pdf": {"plugin":"Acrobat Reader", "link":"http://get.adobe.com/reader"},
 				"flash": {"plugin":"Flash Player","link": "http://get.adobe.com/flash"},
-				"quicktime": {"plugin":"Quicktime Player", "link":"http://www.apple.com/quicktime/download/"},
+				"quicktime": {"plugin":"Quicktime Player", "link": "http://www.apple.com/quicktime/download/"},
 				"wmp": {"plugin":"Windows Media Player Plugin", "link": "http://port25.technet.com/pages/windows-media-player-firefox-plugin-download.aspx"}
 		},
 		maclinks: {
 				"pdf": {"plugin":"Acrobat Reader", "link":"http://get.adobe.com/reader"},
 				"flash": {"plugin":"Flash Player","link": "http://get.adobe.com/flash"},
-				"quicktime": {"plugin":"Quicktime Player", "link":"http://www.apple.com/quicktime/download/"},
+				"quicktime": {"plugin":"Quicktime Player", "link": "http://www.apple.com/quicktime/download/"},
 				"wmp":{"plugin": "Flip4Mac", "link":"http://www.telestream.net/flip4mac/"}		
 		},
 		linlinks: {
 				"pdf": {"plugin":"Acrobat Reader", "link":"http://get.adobe.com/reader"},
 				"flash": {"plugin":"Flash Player","link": "http://get.adobe.com/flash"},
-				"quicktime": {"plugin": "MPlayer", "link":"http://www.mplayerhq.hu/design7/dload.html"},
+				"quicktime": {"plugin": "MPlayer", "link": "http://www.mplayerhq.hu/design7/dload.html"},
 				"wmp":{"plugin": "MPlayer", "link":"http://www.mplayerhq.hu/design7/dload.html"}
 		}
 	};
@@ -251,10 +251,10 @@ if (!String.prototype.format) {
 						"	<div class=\"plugins\">",
 						"		<h3>Plugins</h3>",
 						"		<ul>",
-		            	"			<li class=\"status-{17}\"><a class=\"help-link\" href=\"{18}\" target_=\"_blank\"><div class=\"plugin-acrobat\"></div>{19}</a></li>",
-		            	"			<li class=\"status-{20}\"><a class=\"help-link\" href=\"{21}\" target_=\"_blank\"><div class=\"plugin-flash\"></div>{22}</a></li>",
-		            	"			<li class=\"status-{23}\"><a class=\"help-link\" href=\"{24}\" target_=\"_blank\"><div class=\"plugin-quicktime\"></div>{25}</a></li>",
-		            	"			<li class=\"status-{26}\"><a class=\"help-link\" href=\"{27}\" target_=\"_blank\"><div class=\"plugin-wmp\"></div>{28}</a></li>",
+		            	"			<li class=\"status-{17}\"><a class=\"help-link\" href=\"{18}\" target =\"_blank\"><div class=\"plugin-acrobat\"></div>{19}</a></li>",
+		            	"			<li class=\"status-{20}\"><a class=\"help-link\" href=\"{21}\" target =\"_blank\"><div class=\"plugin-flash\"></div>{22}</a></li>",
+		            	"			<li class=\"status-{23}\"><a class=\"help-link\" href=\"{24}\" target =\"_blank\"><div class=\"plugin-quicktime\"></div>{25}</a></li>",
+		            	"			<li class=\"status-{26}\"><a class=\"help-link\" href=\"{27}\" target =\"_blank\"><div class=\"plugin-wmp\"></div>{28}</a></li>",
 						"		</ul>",
 						"	</div>",
 						"</div>",
