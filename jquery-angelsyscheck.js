@@ -109,7 +109,42 @@ if (!String.prototype.format) {
 			 *	* i = ingore case
 			**/
 			$.each(window.navigator.plugins, function(index, plugin){
-				switch(true){
+                //Checking MimeTypes instead of plugin.name
+                //Since MimeTypes are more reliable 
+                /* Samples:
+                 * video/mp4: MP4 video; Defined in RFC 4337
+                 * video/quicktime: QuickTime video; Registered[15]
+                 * video/x-ms-wmv: Windows Media Video; Documented in Microsoft KB 288102
+                 * video/x-flv: Flash video (FLV files)
+                 * application/pdf: Portable Document Format, PDF has been in use for document exchange on the Internet since 1993; Defined in RFC 3778                
+                 */
+                $.each(plugin, function(i, mime){
+                    var mimetype = mime.type;
+                    switch(true){
+                        case /quicktime/i.test(mimetype):
+                            settings.quicktime.status = "ok";
+                            settings.quicktime.plugin = plugin.name;
+                            break;
+                        case /wmv/i.test(mimetype):
+                            settings.wmp.status = "ok";
+                            settings.wmp.plugin = plugin.name;
+                            break;
+                        case /flash/i.test(mimetype):
+                            settings.flash.status = "ok";
+                            settings.flash.plugin = plugin.name;
+                            break;
+                        case /pdf/i.test(mimetype):
+                            settings.acrobat.status = "ok";
+                            settings.acrobat.plugin = plugin.name;
+                            break;
+                        case /java/i.test(mimetype):
+                            settings.java.status = "ok";
+                            settings.java.plugin = plugin.name;
+                            break;
+                    }
+                });
+
+				/*switch(true){
 					//Acrobat Reader, older plugins
 					case /acrobat/i.test(plugin.name):
 						settings.acrobat.status = "ok";
@@ -169,7 +204,7 @@ if (!String.prototype.format) {
 						settings.wmp.status = "ok";
 						settings.wmp.plugin = plugin.name; 
 						break;
-				}
+				}*/
 			});
 
 		},//end of checkPlugins Add: , newMethod: function()
