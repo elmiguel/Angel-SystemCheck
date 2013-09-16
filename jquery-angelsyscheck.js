@@ -144,67 +144,6 @@ if (!String.prototype.format) {
                     }
                 });
 
-				/*switch(true){
-					//Acrobat Reader, older plugins
-					case /acrobat/i.test(plugin.name):
-						settings.acrobat.status = "ok";
-						settings.acrobat.plugin = plugin.name; 
-						break;
-
-					//Adobe Acrobat, not the same as Acrobat Reader for some reason
-					case /adobe\s+acrobat/i.test(plugin.name):
-						settings.acrobat.status = "ok";
-						settings.acrobat.plugin = plugin.name; 
-						break;
-					
-					//Adobe Reader
-					case /adobe\s+reader/i.test(plugin.name):
-						settings.acrobat.status = "ok";
-						settings.acrobat.plugin = plugin.name; 
-						break;
-					
-					//Chrome PDF Viewer or PDF something
-					case /pdf/i.test(plugin.name):
-						settings.acrobat.status = "ok";
-						settings.acrobat.plugin = plugin.name; 
-						break;
-
-
-					//Adobe Flash or Shockwave Flash
-					case /flash/i.test(plugin.name):
-						settings.flash.status = "ok";
-						settings.flash.plugin = plugin.name; 
-						break;
-
-					//Windows Media Player
-					case /media\s+player/i.test(plugin.name):
-						settings.wmp.status = "ok";
-						settings.wmp.plugin = plugin.name; 
-						break;
-					
-					//Quicktime player
-					case /quicktime/i.test(plugin.name):
-						settings.quicktime.status = "ok";
-						settings.quicktime.plugin = plugin.name; 
-						break;
-					
-					//Java(TM) and the like.
-					case /java\(.*\)/i.test(plugin.name):
-						settings.java.status = "ok";
-						settings.java.plugin = plugin.name; 
-						break;
-					
-					//Java Applet and the like.
-					case /java\s+applet/i.test(plugin.name):
-						settings.java.status = "ok";
-						settings.java.plugin = plugin.name; 
-						break;
-					//Flip4Mac for  Mac users, just setting the WMP as its just a codec
-					case /flip4mac/i.test(plugin.name):
-						settings.wmp.status = "ok";
-						settings.wmp.plugin = plugin.name; 
-						break;
-				}*/
 			});
 
 		},//end of checkPlugins Add: , newMethod: function()
